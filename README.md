@@ -60,215 +60,341 @@
 
    SQL Logic :
 
-   Select
+  		 Select
 
-	    FORMAT(o.order_purchase_timestamp, 'yyyy-MM') AS [Month],
-	    SUM(p.payment_value) AS TotalRevenue
-  from Orders_table o
-  Join Payments_table p ON o.order_id = p.order_id
-  group by FORMAT(o.order_purchase_timestamp, 'yyyy-MM')
-  order by [Month];
-
-
-
-  Select 
-	  FORMAT(o.order_purchase_timestamp, 'yyyy-dd') AS [Day],
-	  SUM(p.payment_installments) AS TotalRevenue 
-  from Orders_table o
-  Join Payments_table p ON o.order_id = p.order_id
-  group by FORMAT(o.order_purchase_timestamp, 'yyyy-dd')
-  order by [Day];
+	   		 FORMAT(o.order_purchase_timestamp, 'yyyy-MM') AS [Month],
+   
+	    		 SUM(p.payment_value) AS TotalRevenue
+   
+  			from Orders_table o
+   
+  		Join Payments_table p ON o.order_id = p.order_id
+   
+  		group by FORMAT(o.order_purchase_timestamp, 'yyyy-MM')
+   
+ 		order by [Month];
 
 
-    Select 
-	    FORMAT(o.order_purchase_timestamp, 'yyyy-WW') AS [Week],
-	    SUM(p.payment_installments) AS TotalRevenue 
-    from Orders_table o
-    Join Payments_table p ON o.order_id = p.order_id
-    group by FORMAT(o.order_purchase_timestamp, 'yyyy-WW')
-    order by [Week];
+
+		Select
+
+	 		 FORMAT(o.order_purchase_timestamp, 'yyyy-dd') AS [Day],
+   
+	  		SUM(p.payment_installments) AS TotalRevenue
+    
+ 		from Orders_table o
+   
+  		Join Payments_table p ON o.order_id = p.order_id
+   
+  		group by FORMAT(o.order_purchase_timestamp, 'yyyy-dd')
+   
+  		order by [Day];
+
+
+    		Select
+   
+	    		FORMAT(o.order_purchase_timestamp, 'yyyy-WW') AS [Week],
+   
+	    		SUM(p.payment_installments) AS TotalRevenue
+   
+    		from Orders_table o
+   
+    		Join Payments_table p ON o.order_id = p.order_id
+   
+    		group by FORMAT(o.order_purchase_timestamp, 'yyyy-WW')
+   
+    		order by [Week];
 
 
 7. Most Favored Product Categories and Sales Comparison
 
 
-      Select 
-	pr.product_category_name,
-	COUNT(DISTINCT oi.order_id) AS TotalOrders,
-	SUM(oi.price * oi.freight_value) AS TotalSales
+   		Select
+   
+			pr.product_category_name,
 
-from Order_items_table oi 
-join Products_table pr ON oi.product_id = pr.product_id 
-group by pr.product_category_name 
-order by TotalSales DESC; 
+			COUNT(DISTINCT oi.order_id) AS TotalOrders,
 
-Select 
-	p.product_category_name,
-	COUNT(DISTINCT oi.order_id) AS total_orders,
-	SUM(oi.price * oi.freight_value) AS total_revenue 
-from Order_items_table oi
-join Products_table p ON oi.product_id = p.product_id 
-group by p.product_category_name 
-order by total_revenue DESC; 
+			SUM(oi.price * oi.freight_value) AS TotalSales
+
+		from Order_items_table oi
+
+		join Products_table pr ON oi.product_id = pr.product_id
+
+		group by pr.product_category_name
+ 
+		order by TotalSales DESC;
+ 
+
+		Select 
+			p.product_category_name,
+   
+			COUNT(DISTINCT oi.order_id) AS total_orders,
+   
+			SUM(oi.price * oi.freight_value) AS total_revenue
+    
+		from Order_items_table oi
+
+		join Products_table p ON oi.product_id = p.product_id
+ 
+		group by p.product_category_name
+ 
+		order by total_revenue DESC; 
 
 
-Select 
-	FORMAT(o.order_purchase_timestamp, 'yyyy-MM') AS [Month],
-	p.product_category_name,
-	SUM(oi.price) AS total_sales
+		Select
 
-from Orders_table o 
-Join Order_items_table oi ON o.order_id = oi.order_id
-Join Products_table p ON oi.product_id = p.product_id
-group by FORMAT(o.order_purchase_timestamp, 'yyyy-MM'), p.product_category_name
-order by [Month], total_sales DESC;
+			FORMAT(o.order_purchase_timestamp, 'yyyy-MM') AS [Month],
+   
+			p.product_category_name,
+   
+			SUM(oi.price) AS total_sales
+
+		from Orders_table o
+
+		Join Order_items_table oi ON o.order_id = oi.order_id
+
+		Join Products_table p ON oi.product_id = p.product_id
+
+		group by FORMAT(o.order_purchase_timestamp, 'yyyy-MM'), p.product_category_name
+
+		order by [Month], total_sales DESC;
 
 
 8. Mean Order Value (AOV) Across Categories and Payment Methods
 
 
 
-          Select 
-	pr.product_category_name,
-	AVG(oi.price + oi.freight_value) AS AvgOrderValue 
-from Order_items_table oi 
-join Products_table pr ON oi.product_id = pr.product_id 
-group by pr.product_category_name 
-order by AvgOrderValue DESC;
+   		Select 
+			pr.product_category_name,
+   
+			AVG(oi.price + oi.freight_value) AS AvgOrderValue
+    
+			from Order_items_table oi
+   
+			join Products_table pr ON oi.product_id = pr.product_id
+    
+			group by pr.product_category_name
+   
+			order by AvgOrderValue DESC;
 
-Select 
-	p.product_category_name,
-	pay.payment_type,
-	COUNT(DISTINCT oi.order_id) AS total_orders,
-	SUM(pay.payment_value) AS total_revenue,
-	AVG(pay.payment_value) AS avg_order_value
+		Select
+ 
+			p.product_category_name,
+   
+			pay.payment_type,
+   
+			COUNT(DISTINCT oi.order_id) AS total_orders,
+   
+			SUM(pay.payment_value) AS total_revenue,
+   
+			AVG(pay.payment_value) AS avg_order_value
 
-from Order_items_table oi 
-Join Products_table p ON oi.product_id = p.product_id 
-Join Payments_table pay ON oi.order_id = pay.order_id
-group by p.product_category_name, pay.payment_type
-order by total_revenue DESC;
+		from Order_items_table oi
+ 
+		Join Products_table p ON oi.product_id = p.product_id
+
+		Join Payments_table pay ON oi.order_id = pay.order_id
+
+		group by p.product_category_name, pay.payment_type
+
+		order by total_revenue DESC;
 
 
-Select 
-	p.product_category_name,
-	pay.payment_type,
-	COUNT(DISTINCT oi.order_id) AS total_orders,
-	SUM(pay.payment_value) AS total_revenue,
-	AVG(pay.payment_value) AS avg_order_value
+		Select
+ 
+			p.product_category_name,
+   
+			pay.payment_type,
+   
+			COUNT(DISTINCT oi.order_id) AS total_orders,
+   
+			SUM(pay.payment_value) AS total_revenue,
+   
+			AVG(pay.payment_value) AS avg_order_value
 	
-from Order_items_table oi 
-Join Products_table p ON oi.product_id = p.product_id 
-Join Payments_table pay ON oi.order_id = pay.order_id
-group by p.product_category_name, pay.payment_type
-having SUM(pay.payment_value) > 10000 
-order by total_revenue DESC, avg_order_value DESC;
+		from Order_items_table oi
+ 
+		Join Products_table p ON oi.product_id = p.product_id
+
+		Join Payments_table pay ON oi.order_id = pay.order_id
+
+		group by p.product_category_name, pay.payment_type
+
+		having SUM(pay.payment_value) > 10000
+
+		order by total_revenue DESC, avg_order_value DESC;
 
 
 
-9. Active Sellers and Their Growth Trends
+10. Active Sellers and Their Growth Trends
 
 
 
 
 
    
-Select 
-	FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS [Month],
-	COUNT(DISTINCT oi.seller_id) AS Unique_Sellers
+		Select
 
-from Order_items_table oi
-Join Orders_table o ON oi.order_id = o.order_id 
-where o.order_status ='delivered' 
-group by FORMAT(o.order_delivered_carrier_date, 'yyyy-MM')
-order by [Month];
+			FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS [Month],
+
+			COUNT(DISTINCT oi.seller_id) AS Unique_Sellers
+
+		from Order_items_table oi
+
+		Join Orders_table o ON oi.order_id = o.order_id
+
+		where o.order_status ='delivered'
+ 
+		group by FORMAT(o.order_delivered_carrier_date, 'yyyy-MM')
+
+		order by [Month];
 
 
 
-Select 
-	YEAR(o.order_delivered_carrier_date) AS [Year],
-	COUNT(DISTINCT oi.seller_id) AS Unique_Selllers
+		Select
+ 
+			YEAR(o.order_delivered_carrier_date) AS [Year],
 
-	from Order_items_table oi 
-	Join Orders_table o ON oi.order_id = o.order_id 
-	where o.order_status = 'delivered' 
+			COUNT(DISTINCT oi.seller_id) AS Unique_Selllers
+
+		from Order_items_table oi
+ 
+		Join Orders_table o ON oi.order_id = o.order_id
+ 
+	where o.order_status = 'delivered'
+ 
 	group by YEAR(o.order_delivered_carrier_date)
+
 	order by [YEAR];
 
 
 	With MonthlySellers AS (
-    Select 
-        FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS [Month],
-        COUNT(DISTINCT oi.seller_id) AS Unique_Sellers
-    from Order_items_table oi
-    JOIN Orders_table o ON oi.order_id = o.order_id
-    where o.order_status = 'delivered'
-    group by FORMAT(o.order_delivered_carrier_date, 'yyyy-MM')
-)
-Select 
-    [Month],
-    Unique_Sellers,
-    LAG(Unique_Sellers) over (Order by [Month]) AS Prev_Month_Sellers,
-    ROUND(
-        (CAST(Unique_Sellers AS float) - LAG(Unique_Sellers) over (Order by [Month])) 
-        / NULLIF(LAG(Unique_Sellers) over (Order by [Month]), 0) * 100, 2
-    ) AS Seller_Growth_Percentage
-from MonthlySellers;
+
+   			 Select 
+       				 FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS [Month],
+    
+       				 COUNT(DISTINCT oi.seller_id) AS Unique_Sellers
+    
+    			from Order_items_table oi
+    
+    			JOIN Orders_table o ON oi.order_id = o.order_id
+    
+   			where o.order_status = 'delivered'
+    
+    			group by FORMAT(o.order_delivered_carrier_date, 'yyyy-MM'
+          )
+    
+
+		Select
+ 
+   		 	[Month],
+    
+    			Unique_Sellers,
+    
+   			LAG(Unique_Sellers) over (Order by [Month]) AS Prev_Month_Sellers,
+    
+   			ROUND(
+    
+        		(CAST(Unique_Sellers AS float) - LAG(Unique_Sellers) over (Order by [Month]))
+     
+        		/ NULLIF(LAG(Unique_Sellers) over (Order by [Month]), 0) * 100, 2
+    
+    			) AS Seller_Growth_Percentage
+    
+		from MonthlySellers;
 
 
 
 
-Select 
-    seller_id,
-    FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS activity_month
-into #SellerMonthlyActivity
-from Order_items_table oi
-JOIN Orders_table o ON oi.order_id = o.order_id
-where o.order_status = 'delivered'
-group by seller_id, FORMAT(o.order_delivered_carrier_date, 'yyyy-MM')
+		Select
+
+    			seller_id,
+    
+    			FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS activity_month
+    
+		into #SellerMonthlyActivity
+
+		from Order_items_table oi
+
+		JOIN Orders_table o ON oi.order_id = o.order_id
+
+		where o.order_status = 'delivered'
+
+		group by seller_id, FORMAT(o.order_delivered_carrier_date, 'yyyy-MM')
 
 
 
 
-Select
-    activity_month,
-    COUNT(*) AS total_active_sellers,
-    COUNT(CASE when first_month = activity_month then 1 end ) AS new_sellers,
-    COUNT(CASE when first_month < activity_month then 1 end ) AS returning_sellers
+		Select
 
-    from (
-        select 
-            seller_id,
-            activity_month,
-            MIN(activity_month) Over (Partition by seller_id) AS first_month 
-        from #SellerMonthlyActivity
-      )AS activity
-      group by activity_month
-      order by activity_month;
+    			activity_month,
+    
+    			COUNT(*) AS total_active_sellers,
+    
+    			COUNT(CASE when first_month = activity_month then 1 end ) AS new_sellers,
+    
+    			COUNT(CASE when first_month < activity_month then 1 end ) AS returning_sellers
+
+    		from (
+       			 select
+    
+            		 seller_id,
+    
+            		 activity_month,
+    
+           		 MIN(activity_month) Over (Partition by seller_id) AS first_month
+    
+        	from #SellerMonthlyActivity
+    
+      		)AS activity
+    
+    		group by activity_month
+    
+      		order by activity_month;
 
 
-Select 
-    activity_month,
-    total_active_sellers,
-    new_sellers,
-    returning_sellers,
-    ROUND(CAST(returning_sellers AS float) / total_active_sellers * 100, 2) AS retention_rate_percent
-from (
-    Select
-        seller_id
-        activity_month,
-        COUNT(*) AS total_active_sellers,
-        COUNT(CASE when first_month = activity_month then 1 end ) AS new_sellers,
-        COUNT(CASE when first_month < activity_month then 1 end ) AS returning_sellers
+		Select
 
-    from (
-        select 
-            seller_id,
-            activity_month,
-            MIN(activity_month) Over (Partition by seller_id) AS first_month 
-        from #SellerMonthlyActivity
-    )AS activity
-    group by activity_month
+    			activity_month,
+    
+    			total_active_sellers,
+    
+    			new_sellers,
+    
+    			returning_sellers,
+    
+    			ROUND(CAST(returning_sellers AS float) / total_active_sellers * 100, 2) AS retention_rate_percent
+    
+		from (
+
+   			 Select
+    
+       				 seller_id
+    
+        			 activity_month,
+    
+        			 COUNT(*) AS total_active_sellers,
+    
+    				 COUNT(CASE when first_month = activity_month then 1 end ) AS new_sellers,
+    
+        			COUNT(CASE when first_month < activity_month then 1 end ) AS returning_sellers
+
+    			from (
+    
+        			select
+    
+            				seller_id,
+    
+            				activity_month,
+    
+            				MIN(activity_month) Over (Partition by seller_id) AS first_month
+    
+        				from #SellerMonthlyActivity
+    
+    				)AS activity
+    
+    			       group by activity_month
 
 
 
@@ -278,132 +404,221 @@ from (
 
 
 
-    Select s.seller_id, AVG(r.review_score) AS avg_rating,
-       SUM(p.payment_value) AS total_sales
-FROM Sellers_table s
-JOIN Order_items_table oi ON s.seller_id = oi.seller_id
-JOIN Payments_table p ON oi.order_id = p.order_id
-JOIN Customers_review_table r ON oi.order_id = r.order_id
-GROUP BY s.seller_id;
+    		Select
+    
+    			 s.seller_id, AVG(r.review_score) AS avg_rating,
+    
+      			 SUM(p.payment_value) AS total_sales
+    
+		FROM Sellers_table s
+
+		JOIN Order_items_table oi ON s.seller_id = oi.seller_id
+
+		JOIN Payments_table p ON oi.order_id = p.order_id
+
+		JOIN Customers_review_table r ON oi.order_id = r.order_id
+
+		GROUP BY s.seller_id;
 
 
 
-Select
-    oi.seller_id,
-    r.review_score
+		Select
 
-from Customers_review_table r
-Join Order_items_table oi ON r.order_id = oi.order_id;
+    			oi.seller_id,
+    
+    			r.review_score
 
+		from Customers_review_table r
 
-Select
-    oi.seller_id,
-    COUNT(*) AS total_reviews,
-    AVG(CAST(r.review_score AS float)) AS avg_rating,
-    COUNT(CASE when r.review_score = 5 then 1 end) AS five_star_reviews,
-    COUNT(CASE when r.review_score = 4 then 1 end) AS four_star_reviews,
-    COUNT(CASE when r.review_score = 3 then 1 end) AS three_star_reviews,
-    COUNT(CASE when r.review_score = 2 then 1 end) AS two_star_reviews,
-    COUNT(CASE when r.review_score = 1 then 1 end) AS one_star_reviews
-from Customers_review_table r
-JOIN Order_items_table oi ON r.order_id = oi.order_id
-group by  oi.seller_id
-order by avg_rating DESC;
+		Join Order_items_table oi ON r.order_id = oi.order_id;
 
 
-Select
-    review_score,
-    COUNT(*) AS total_reviews
-from Customers_review_table
-group by review_score
-order by review_score DESC;
+		Select
+
+    			oi.seller_id,
+    
+    			COUNT(*) AS total_reviews,
+    
+    			AVG(CAST(r.review_score AS float)) AS avg_rating,
+    
+    			COUNT(CASE when r.review_score = 5 then 1 end) AS five_star_reviews,
+    
+    			COUNT(CASE when r.review_score = 4 then 1 end) AS four_star_reviews,
+    
+    			COUNT(CASE when r.review_score = 3 then 1 end) AS three_star_reviews,
+    
+   			COUNT(CASE when r.review_score = 2 then 1 end) AS two_star_reviews,
+    
+    			COUNT(CASE when r.review_score = 1 then 1 end) AS one_star_reviews
+    
+		from Customers_review_table r
+
+		JOIN Order_items_table oi ON r.order_id = oi.order_id
+
+		group by  oi.seller_id
+
+		order by avg_rating DESC;
 
 
-with  ScoreCounts AS (
-    Select 
-        review_score,
-        COUNT(*) AS review_count
-    from Customers_review_table
-    group by review_score
-),
-TotalReviews AS (
-    select SUM(review_count) AS total_count from ScoreCounts
-)
-Select 
-    sc.review_score,
-    sc.review_count,
-    ROUND(CAST(sc.review_count AS float) / tr.total_count * 100, 2) AS percent_of_total
-from ScoreCounts sc
-CROSS JOIN TotalReviews tr
-order by sc.review_score DESC;
+		Select
+
+    			review_score,
+    
+    			COUNT(*) AS total_reviews
+    
+		from Customers_review_table
+
+		group by review_score
+
+		order by review_score DESC;
 
 
+		with  ScoreCounts AS (
 
+    			Select
+    
+        			review_score,
+    
+        			COUNT(*) AS review_count
+    
+    			from Customers_review_table
+    
+    			group by review_score
 
+		), 
+		
+  		TotalReviews AS (
 
-with SellerReviews AS (
-    Select 
-        oi.seller_id,
-        r.review_score
-    from Customers_review_table r
-    JOIN Order_items_table oi ON r.order_id = oi.order_id
-),
-SellerSales AS (
-    Select 
-        oi.seller_id,
-        SUM(p.payment_value) AS total_sales
-    from Order_items_table oi
-    JOIN Payments_table p ON oi.order_id = p.order_id
-    group by oi.seller_id
-),
-Combined AS (
-    Select 
-        sr.seller_id,
-        AVG(CAST(sr.review_score AS float)) AS avg_rating,
-        ss.total_sales
-    from SellerReviews sr
-    JOIN SellerSales ss ON sr.seller_id = ss.seller_id
-    group by sr.seller_id, ss.total_sales
-)
-Select *
-from Combined
-order by avg_rating DESC;
+    			select SUM(review_count) AS total_count from ScoreCounts
+		
+  		)
 
+			Select
 
+    				sc.review_score,
+    
+    				sc.review_count,
+    
+   				ROUND(CAST(sc.review_count AS float) / tr.total_count * 100, 2) AS percent_of_total
+    
+			from ScoreCounts sc
 
+			CROSS JOIN TotalReviews tr
 
-with SellerRatings AS (
-    Select  
-        oi.seller_id,
-        AVG(CAST(r.review_score AS float)) AS avg_rating
-    from Customers_review_table r
-    JOIN Order_items_table oi ON r.order_id = oi.order_id
-    group by oi.seller_id
-),
-
-
-SellerSales AS (
-    Select 
-        oi.seller_id,
-        SUM(p.payment_value) AS total_revenue
-    from Order_items_table oi
-    JOIN Payments_table p ON oi.order_id = p.order_id
-    GROUP BY oi.seller_id
-)
-
-
-Select 
-    sr.seller_id,
-    sr.avg_rating,
-    ss.total_revenue
-from SellerRatings sr
-JOIN SellerSales ss ON sr.seller_id = ss.seller_id
-order by sr.avg_rating DESC;
+			order by sc.review_score DESC;
 
 
 
 
-11. Business Impact and Insights
+
+		with SellerReviews AS (
+
+    				Select
+    
+       					 oi.seller_id,
+    
+       					 r.review_score
+    
+    				from Customers_review_table r
+    
+    				JOIN Order_items_table oi ON r.order_id = oi.order_id
+    
+			),
+		
+  			SellerSales AS (
+    
+    				Select
+    
+       					 oi.seller_id,
+    
+       					 SUM(p.payment_value) AS total_sales
+    
+    				from Order_items_table oi
+    
+    				JOIN Payments_table p ON oi.order_id = p.order_id
+    
+    				group by oi.seller_id
+    
+			),
+    
+		Combined AS (
+
+    				Select
+    
+        				sr.seller_id,
+    
+        				AVG(CAST(sr.review_score AS float)) AS avg_rating,
+    
+        				ss.total_sales
+    
+   				from SellerReviews sr
+    
+    				JOIN SellerSales ss ON sr.seller_id = ss.seller_id
+    
+    				group by sr.seller_id, ss.total_sales
+    
+			)
+				Select *
+    
+				from Combined
+    
+				order by avg_rating DESC;
+
+
+
+
+		with SellerRatings AS (
+
+   				 Select
+      
+        				oi.seller_id,
+    
+        				AVG(CAST(r.review_score AS float)) AS avg_rating
+    
+    				from Customers_review_table r
+    
+    				JOIN Order_items_table oi ON r.order_id = oi.order_id
+    
+    				group by oi.seller_id
+    
+			),
+
+
+		SellerSales AS (
+
+    				Select
+    
+        				oi.seller_id,
+    
+        				SUM(p.payment_value) AS total_revenue
+    
+    				from Order_items_table oi
+    
+   				JOIN Payments_table p ON oi.order_id = p.order_id
+    
+   			        GROUP BY oi.seller_id
+    
+		)
+
+
+				Select
+    
+    					sr.seller_id,
+    
+    					sr.avg_rating,
+    
+   	 				ss.total_revenue
+    
+					from SellerRatings sr
+    
+					JOIN SellerSales ss ON sr.seller_id = ss.seller_id
+    
+					order by sr.avg_rating DESC;
+
+
+
+
+12. Business Impact and Insights
 
     (1) Rupees 4K in Cumulative Revenue Trends Over Time as of Aug 2018 with steady growth trajectory.
     
