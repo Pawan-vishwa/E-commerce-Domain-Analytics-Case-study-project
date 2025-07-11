@@ -421,3 +421,4 @@ order by sr.avg_rating DESC;
      		 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Seller%20Ratings%20and%20Impact%20on%20Sales%20Performance.png )
     
                 
+<img width="1366" height="785" alt="Cumulative Revenue trends over time" src="https://github.com/user-attachments/assets/ed3a8fc8-14c2-4740-b8f6-4d2e784ba11f" />
