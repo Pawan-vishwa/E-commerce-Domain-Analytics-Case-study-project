@@ -406,13 +406,18 @@ order by sr.avg_rating DESC;
 11. Business Impact and Insights
 
     (1) Rupees 4K in Cumulative Revenue Trends Over Time as of Aug 2018 with steady growth trajectory.
+    
     (2) Top Categories : Beauty, Health and Sports, Leisure.
+    
     (3) Global AOV :  Rupess 0.138K Credit cards orders over average Rupess 98.666K vs Rupees 134.936K for Sum of Order_items_id and OrderCount by payment_type.
+    
     (4) Seller Count : 3.095K Active Sellers in july 2018 with 0.026K year over year increase.
+    
     (5) High-rated Sellers : Sum of review_score >= 4.5 generate approximately 3 times more revenue than low-rated Sellers (scores <= 3.5).
+    
 
 
-12.  Screenshots / Demos.
+13.  Screenshots / Demos.
 
 	Show what the dashboard looks like : 
     	Example :[Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Active%20Sellers%20and%20Their%20Growth%20Trends.png )
