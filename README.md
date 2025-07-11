@@ -418,6 +418,6 @@ order by sr.avg_rating DESC;
      	         [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Cumulative%20Revenue%20trends%20over%20time.png )
 	       	 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Mean%20Order%20Value%20(AOV)%20Across%20Categories%20and%20Payment%20Methods.png)
 	  	 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Most%20Favored%20Product%20Categories%20and%20Sales%20Comparison.png )
-     		 [Dashboard preview]  :()
+     		 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Seller%20Ratings%20and%20Impact%20on%20Sales%20Performance.png )
     
     
