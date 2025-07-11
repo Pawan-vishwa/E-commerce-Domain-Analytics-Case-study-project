@@ -413,5 +413,8 @@ order by sr.avg_rating DESC;
 
 12.  Screenshots / Demos.
 
+	Show what the dashboard looks like :  
+    	Example :
+
     
     
