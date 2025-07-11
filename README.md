@@ -262,14 +262,14 @@
  
 		Join Orders_table o ON oi.order_id = o.order_id
  
-	where o.order_status = 'delivered'
+		where o.order_status = 'delivered'
  
-	group by YEAR(o.order_delivered_carrier_date)
+		group by YEAR(o.order_delivered_carrier_date)
 
-	order by [YEAR];
+		order by [YEAR];
 
 
-	With MonthlySellers AS (
+		With MonthlySellers AS (
 
    			 Select 
        				 FORMAT(o.order_delivered_carrier_date, 'yyyy-MM') AS [Month],
@@ -283,7 +283,7 @@
    			where o.order_status = 'delivered'
     
     			group by FORMAT(o.order_delivered_carrier_date, 'yyyy-MM'
-          )
+    		   )
     
 
 		Select
