@@ -413,7 +413,7 @@ order by sr.avg_rating DESC;
 
 12.  Screenshots / Demos.
 
-	Show what the dashboard looks like : [Alt Text]: ( ) 
+	Show what the dashboard looks like : [Alt Text]: (https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Active%20Sellers%20and%20Their%20Growth%20Trends.png ) 
     	Example :[Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Active%20Sellers%20and%20Their%20Growth%20Trends.png )
      	         [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Cumulative%20Revenue%20trends%20over%20time.png )
 	       	 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Mean%20Order%20Value%20(AOV)%20Across%20Categories%20and%20Payment%20Methods.png)
