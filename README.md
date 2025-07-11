@@ -415,6 +415,9 @@ order by sr.avg_rating DESC;
 
 	Show what the dashboard looks like :  
     	Example :[Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Active%20Sellers%20and%20Their%20Growth%20Trends.png )
-     	         [Dashboard preview]  :()
+     	         [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Cumulative%20Revenue%20trends%20over%20time.png )
+	       	 [Dashboard preview]  :()
+	  	 [Dashboard preview]  :()
+     		 [Dashboard preview]  :()
     
     
