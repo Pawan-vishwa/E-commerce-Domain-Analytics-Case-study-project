@@ -420,4 +420,4 @@ order by sr.avg_rating DESC;
 	  	 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Most%20Favored%20Product%20Categories%20and%20Sales%20Comparison.png )
      		 [Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Seller%20Ratings%20and%20Impact%20on%20Sales%20Performance.png )
     
-    
+                
