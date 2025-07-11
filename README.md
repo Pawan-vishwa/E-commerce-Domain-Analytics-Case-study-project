@@ -414,7 +414,7 @@ order by sr.avg_rating DESC;
 12.  Screenshots / Demos.
 
 	Show what the dashboard looks like :  
-    	Example :
-
+    	Example :[Dashboard preview]  :(https://github.com/Pawan-vishwa/E-commerce-Domain-Analytics-Case-study-project/blob/main/Active%20Sellers%20and%20Their%20Growth%20Trends.png )
+     	         [Dashboard preview]  :()
     
     
