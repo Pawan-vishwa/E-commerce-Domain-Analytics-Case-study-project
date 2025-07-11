@@ -2,7 +2,7 @@
 
 1. Comprehensive E-Commerce Domain Analytics Case study Platform Analysis.
 
- This project involves comprehensive analysis of an e-commerce platform using orders_table, products_table, customers_table, sellers_table, payments_table, and customers_review_table data. The objective is to      uncover key business insights including revenue trends,    category performance, seller activity, and customer experience.
+   This project involves comprehensive analysis of an e-commerce platform using orders_table, products_table, customers_table, sellers_table, payments_table, and customers_review_table data. The objective is to     uncover key business insights including revenue trends,    category performance, seller activity, and customer experience.
 
 3. Key Business Questions
 
